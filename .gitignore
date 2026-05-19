@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Modal
+.modal.toml
+
+# Secrets / env
+.env
+*.env
+cookies.txt
+
+# macOS
+.DS_Store
+
+# Temp audio files
+/tmp/
+*.mp3
+*.wav
+*.webm
+*.ogg
+*.m4a

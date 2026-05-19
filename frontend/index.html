@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tamil Audio Transcriber | தமிழ் ஆடியோ டிரான்ஸ்கிரைபர்</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="stylesheet" href="style.css?v=6" />
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">🎙️</div>
+      <h1 class="header-title">Tamil Audio Transcriber</h1>
+      <p class="header-subtitle">தமிழ் ஆடியோவை உரையாக மாற்றுங்கள்</p>
+      <p class="header-model">Powered by <span class="model-badge">openai/whisper-large-v3</span></p>
+    </header>
+
+    <main class="main">
+      <!-- Upload Section -->
+      <section class="card upload-card">
+        <h2 class="card-title">ஆடியோ கோப்பை பதிவேற்றவும்</h2>
+        <p class="card-subtitle">Upload your Tamil audio file</p>
+
+        <!-- Drop Zone -->
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-inner" id="dropzoneInner">
+            <div class="dropzone-icon">🎵</div>
+            <p class="dropzone-text">Drag & drop your audio file here</p>
+            <p class="dropzone-subtext">or</p>
+            <label class="btn btn-outline" for="fileInput">
+              Browse Files
+            </label>
+            <input type="file" id="fileInput" accept="audio/*,video/mp4,video/webm" hidden />
+            <p class="dropzone-formats">Supported: MP3, WAV, OGG, FLAC, M4A, MP4, WebM</p>
+          </div>
+        </div>
+
+        <!-- Selected File Info -->
+        <div class="file-info" id="fileInfo" hidden>
+          <div class="file-info-icon">📄</div>
+          <div class="file-info-details">
+            <p class="file-name" id="fileName"></p>
+            <p class="file-size" id="fileSize"></p>
+          </div>
+          <button class="btn-icon" id="clearFile" title="Remove file">✕</button>
+        </div>
+
+        <!-- Record Audio -->
+        <div class="divider"><span>or record live</span></div>
+
+        <div class="record-section">
+          <button class="btn btn-record" id="recordBtn">
+            <span class="record-dot"></span>
+            <span id="recordBtnText">Start Recording</span>
+          </button>
+          <p class="record-timer" id="recordTimer" hidden>00:00</p>
+        </div>
+
+        <!-- YouTube Link -->
+        <div class="divider"><span>or paste a YouTube link</span></div>
+
+        <div class="youtube-section">
+          <input
+            type="url"
+            id="youtubeInput"
+            class="youtube-input"
+            placeholder="https://www.youtube.com/watch?v=..."
+          />
+          <button class="btn btn-youtube" id="youtubeBtn">
+            ▶ Extract &amp; Transcribe
+          </button>
+        </div>
+
+        <!-- Transcribe Button -->
+        <button class="btn btn-primary" id="transcribeBtn" disabled>
+          <span id="transcribeBtnText">Transcribe Audio</span>
+        </button>
+      </section>
+
+      <!-- Progress -->
+      <div class="progress-container" id="progressContainer" hidden>
+        <div class="progress-card">
+          <div class="spinner"></div>
+          <p class="progress-text" id="progressText">Uploading audio...</p>
+          <p class="progress-sub">This may take a moment depending on audio length</p>
+        </div>
+      </div>
+
+      <!-- Live Log Panel -->
+      <div class="card log-card" id="logCard" hidden>
+        <div class="log-header">
+          <span class="log-title">Live Logs</span>
+          <span class="log-badge" id="logBadge">processing</span>
+        </div>
+        <div class="log-body" id="logBody"></div>
+      </div>
+
+      <!-- Results Section -->
+      <section class="card result-card" id="resultCard" hidden>
+        <div class="result-header">
+          <h2 class="card-title">Transcription Result</h2>
+          <div class="result-meta" id="resultMeta"></div>
+        </div>
+
+        <div class="result-body">
+          <div class="result-label">தமிழ் உரை (Tamil Text)</div>
+          <div class="result-text" id="resultText"></div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-copy" id="copyBtn">
+            📋 Copy Text
+          </button>
+          <button class="btn btn-download" id="downloadBtn">
+            📄 Download as Word (.docx)
+          </button>
+        </div>
+      </section>
+
+      <!-- Error -->
+      <div class="error-card" id="errorCard" hidden>
+        <div class="error-icon">⚠️</div>
+        <p class="error-text" id="errorText"></p>
+        <button class="btn btn-outline btn-sm" id="errorDismiss">Dismiss</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Tamil Audio Transcriber &mdash; openai/whisper-large-v3</p>
+    </footer>
+  </div>
+
+  <script src="app.js?v=6"></script>
+</body>
+</html>
